@@ -14,6 +14,7 @@ import {
   // getCurrentWeather,
   getForecastWeather,
 } from "../Redux/Actions/Actions";
+import moment from "moment";
 
 const Modal_Comp = (props) => {
   const forecast_precip = !props.forecast.weather_forecast
@@ -30,12 +31,14 @@ const Modal_Comp = (props) => {
     PrecipitationProbability,
   }) => (
     <View style={styles.item}>
-      <Text style={styles.title}>Time:{EpochDateTime}</Text>
+      <Text style={styles.title}>
+        Time: {moment(EpochDateTime * 1000).format("MMMM Do YYYY, h:mm:ss a")}
+      </Text>
       <Text style={styles.title}>Weather:{IconPhrase}</Text>
       <Text style={styles.title}>Precipitation:{forecast_precip}</Text>
       <Text style={styles.title}>Temperature:{Temperature.Value}&deg;F</Text>
       <Text style={styles.title}>
-        Precipitation Probability:{PrecipitationProbability}
+        Precipitation Probability:{PrecipitationProbability}%
       </Text>
     </View>
   );

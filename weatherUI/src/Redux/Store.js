@@ -1,6 +1,5 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import authReducer from "./Reducer/Auth_Reducer";
 import weatherReducer from "./Reducer/Reducer";
 import forecastReducer from "./Reducer/Forecast_Reducer";
 import searchCityReducer from "./Reducer/myCity_Reducer";

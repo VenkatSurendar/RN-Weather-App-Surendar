@@ -21,7 +21,7 @@ import Carousel from "react-native-snap-carousel";
 const WatchList = (props) => {
   const [watchCities, setWatchCities] = useState([]);
   const [finalData, setFinalData] = useState([]);
-
+  var findWatch = [];
   async function getAllUrls(cities) {
     try {
       const data = await Promise.all(
@@ -32,14 +32,14 @@ const WatchList = (props) => {
         )
       );
       console.log("watchlist data");
-      // console.log(JSON.stringify(data));
-      console.log(watchCities);
+      console.log("data" + JSON.stringify(data));
+      console.log("Watch " + findWatch);
       data.forEach(function (element, index) {
-        element.place = watchCities[index];
+        element.place = findWatch[index];
       });
 
       setFinalData(data);
-      console.log(JSON.stringify(data));
+      // console.log(JSON.stringify(data[3].place));
 
       return data;
     } catch (error) {
@@ -68,7 +68,7 @@ const WatchList = (props) => {
       .then((res) => {
         // console.log(JSON.stringify(res.data.data.user.watchList));
         setWatchCities(res.data.data.user.watchList);
-
+        findWatch = res.data.data.user.watchList;
         getAllUrls(res.data.data.user.watchList);
       })
       .catch((err) => {
@@ -160,7 +160,7 @@ const WatchList = (props) => {
               <Text
                 style={{ color: "#ffffff", fontWeight: "600", fontSize: 15 }}
               >
-                {/* {item.place} */}
+                {console.log("data1111" + item.place)}
                 {/* {curr_date} */}
                 {/* {item.Day} */}
               </Text>
@@ -168,6 +168,7 @@ const WatchList = (props) => {
                 <Text
                   style={{ color: "#ffffff", fontWeight: "bold", fontSize: 25 }}
                 >
+                  {item.Temperature.Value}
                   {/* {item.weather} */}
                 </Text>
                 <Text

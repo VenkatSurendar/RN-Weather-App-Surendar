@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import {
   Alert,
   Modal,
@@ -35,11 +36,34 @@ const Search_Modal = (props) => {
     //props.navigation.navigate("Home");
     setModalVisible(!modalVisible);
   };
+
+  const handlePressWatchList = (city) => {
+    axios({
+      url: "http://10.59.96.38:4002/graphql",
+      method: "post",
+      data: {
+        query: ` mutation{
+            addWatchList(id:"60e4a1e64808e0206c76926a" , cityname : 'kakinada'){
+             
+            
+             watchList
+             id
+            }
+           }`,
+      },
+    })
+      .then((res) => {
+        console.log(JSON.stringify(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const fetchCities = (city) => {
     console.log("fetchnig");
     setCity(city);
     fetch(
-      `https://dataservice.accuweather.com/locations/v1/cities/autocomplete?q=${city}&apikey=vPTgGSRDsAgsnTWpgYBQ5BLrGopgJnO4`
+      `https://dataservice.accuweather.com/locations/v1/cities/autocomplete?q=${city}&apikey=m75FTc4G2WOrJVvm20O4k5SrwGBM9YyP`
     )
       .then((item) => item.json())
       .then((cityData) => {
@@ -67,7 +91,7 @@ const Search_Modal = (props) => {
               value={city}
               onChangeText={(city) => fetchCities(city)}
             />
-            <TouchableOpacity>
+            <TouchableOpacity onPress={handlePressWatchList}>
               <Text>Add to Watch List</Text>
             </TouchableOpacity>
 
@@ -107,65 +131,6 @@ const Search_Modal = (props) => {
     </View>
   );
 };
-
-// const styles = StyleSheet.create({
-//   centeredView: {
-//     flex: 1,
-//     justifyContent: "center",
-//     alignItems: "center",
-//     marginTop: 22,
-//   },
-//   input: {
-//     height: 40,
-//     margin: 12,
-//     borderRadius: 10,
-//     width: 200,
-//     borderWidth: 0.5,
-//   },
-//   modalView: {
-//     width: 300,
-//     height: 600,
-//     margin: 20,
-//     backgroundColor: "white",
-//     borderRadius: 20,
-//     padding: 35,
-//     alignItems: "center",
-//     shadowColor: "#000",
-//     shadowOffset: {
-//       width: 0,
-//       height: 2,
-//     },
-//     shadowOpacity: 0.25,
-//     shadowRadius: 4,
-//     elevation: 5,
-//   },
-//   button: {
-//     borderRadius: 20,
-//     padding: 10,
-//     elevation: 2,
-//   },
-//   buttonOpen: {
-//     width: 80,
-//     height: 45,
-//     backgroundColor: "white",
-//   },
-//   buttonClose: {
-//     position: "absolute",
-//     bottom: 0,
-//     marginBottom: 10,
-//     // backgroundColor: "white",
-//     // backgroundColor: "#2196F3",
-//   },
-//   textStyle: {
-//     color: "black",
-//     fontWeight: "bold",
-//     textAlign: "center",
-//   },
-//   modalText: {
-//     marginBottom: 15,
-//     textAlign: "center",
-//   },
-// });
 
 const mapStateToProps = (state) => {
   return {

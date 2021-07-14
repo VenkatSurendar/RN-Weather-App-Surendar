@@ -6,9 +6,9 @@ import redis from "redis";
 //vst
 // const key = "z6GumIu7bSvc2FqQjuNS07FNO3wSbAWs";
 // mecparentsportal
-const key = "vPTgGSRDsAgsnTWpgYBQ5BLrGopgJnO4";
+// const key = "vPTgGSRDsAgsnTWpgYBQ5BLrGopgJnO4";
 //fake mail
-// const key = "dZ4Q563pQUqdPw48yvAWADhaAMaJ9WU4";
+const key = "m75FTc4G2WOrJVvm20O4k5SrwGBM9YyP";
 
 //Redis initializing
 const client = redis.createClient(6379);
